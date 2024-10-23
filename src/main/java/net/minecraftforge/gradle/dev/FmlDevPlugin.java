@@ -1,8 +1,6 @@
 package net.minecraftforge.gradle.dev;
 
 //import edu.sc.seis.launch4j.Launch4jPluginExtension;
-import static net.minecraftforge.gradle.dev.DevConstants.CROWDIN_FORGEID;
-import static net.minecraftforge.gradle.dev.DevConstants.CROWDIN_ZIP;
 import static net.minecraftforge.gradle.dev.DevConstants.EXC_MODIFIERS_DIRTY;
 import groovy.lang.Closure;
 
@@ -16,7 +14,6 @@ import net.minecraftforge.gradle.common.Constants;
 import net.minecraftforge.gradle.delayed.DelayedBase;
 import net.minecraftforge.gradle.delayed.DelayedFile;
 import net.minecraftforge.gradle.tasks.ApplyS2STask;
-import net.minecraftforge.gradle.tasks.CrowdinDownloadTask;
 import net.minecraftforge.gradle.tasks.DecompileTask;
 import net.minecraftforge.gradle.tasks.ExtractS2SRangeTask;
 import net.minecraftforge.gradle.tasks.ProcessSrcJarTask;
@@ -354,12 +351,6 @@ public class FmlDevPlugin extends DevBasePlugin
     @SuppressWarnings("serial")
     private void createPackageTasks()
     {
-        CrowdinDownloadTask crowdin = makeTask("getLocalizations", CrowdinDownloadTask.class);
-        {
-            crowdin.setOutput(delayedFile(CROWDIN_ZIP));
-            crowdin.setProjectId(CROWDIN_FORGEID);
-            crowdin.setExtract(false);
-        }
 
         ChangelogTask makeChangelog = makeTask("createChangelog", ChangelogTask.class);
         {
@@ -506,7 +497,6 @@ public class FmlDevPlugin extends DevBasePlugin
             userDev.from(delayedFile(DevConstants.CHANGELOG));
             userDev.from(delayedZipTree(DevConstants.BINPATCH_TMP), new CopyInto("", "devbinpatches.pack.lzma"));
             userDev.from(delayedFileTree("{FML_DIR}/src/main/resources"), new CopyInto("src/main/resources"));
-            userDev.from(delayedZipTree(DevConstants.CROWDIN_ZIP), new CopyInto("src/main/resources"));
             userDev.from(delayedFile(DevConstants.FML_VERSIONF), new CopyInto("src/main/resources"));
             userDev.from(delayedZipTree(DevConstants.USERDEV_SRG_SRC), new CopyInto("src/main/java"));
             userDev.from(delayedFile(DevConstants.DEOBF_DATA), new CopyInto("src/main/resources/"));
