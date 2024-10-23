@@ -370,7 +370,6 @@ public class FmlDevPlugin extends DevBasePlugin
             uni.getOutputs().upToDateWhen(Constants.CALL_FALSE);
             uni.from(delayedZipTree(DevConstants.BINPATCH_TMP));
             uni.from(delayedFileTree(DevConstants.FML_RESOURCES));
-            uni.from(delayedZipTree(DevConstants.CROWDIN_ZIP));
             uni.from(delayedFile(DevConstants.FML_VERSIONF));
             uni.from(delayedFile(DevConstants.FML_LICENSE));
             uni.from(delayedFile(DevConstants.FML_CREDITS));
@@ -390,7 +389,7 @@ public class FmlDevPlugin extends DevBasePlugin
                     return null;
                 }
             });
-            uni.dependsOn("genBinPatches", crowdin, makeChangelog, "createVersionProperties");
+            uni.dependsOn("genBinPatches", makeChangelog, "createVersionProperties");
         }
         project.getArtifacts().add("archives", uni);
 
@@ -510,7 +509,7 @@ public class FmlDevPlugin extends DevBasePlugin
             userDev.rename(".+?\\.exc", "packaged.exc");
             userDev.setIncludeEmptyDirs(false);
             uni.setDuplicatesStrategy(DuplicatesStrategy.EXCLUDE);
-            userDev.dependsOn("packageUniversal", crowdin, patchZip, classZip, "createVersionProperties", s2s);
+            userDev.dependsOn("packageUniversal", patchZip, classZip, "createVersionProperties", s2s);
             userDev.setExtension("jar");
         }
         project.getArtifacts().add("archives", userDev);
