@@ -16,7 +16,6 @@ import net.minecraftforge.gradle.delayed.DelayedFile;
 import net.minecraftforge.gradle.delayed.DelayedBase.IDelayedResolver;
 import net.minecraftforge.gradle.tasks.ApplyS2STask;
 import net.minecraftforge.gradle.tasks.CreateStartTask;
-import net.minecraftforge.gradle.tasks.CrowdinDownloadTask;
 import net.minecraftforge.gradle.tasks.DecompileTask;
 import net.minecraftforge.gradle.tasks.ExtractS2SRangeTask;
 import net.minecraftforge.gradle.tasks.ProcessSrcJarTask;
@@ -461,7 +460,6 @@ public class ForgeDevPlugin extends DevBasePlugin
             uni.from(delayedZipTree(BINPATCH_TMP));
             uni.from(delayedFileTree(FML_RESOURCES));
             uni.from(delayedFileTree(FORGE_RESOURCES));
-            uni.from(delayedZipTree(CROWDIN_ZIP));
             uni.from(delayedFile(FML_VERSIONF));
             uni.from(delayedFile(FML_LICENSE));
             uni.from(delayedFile(FML_CREDITS));
@@ -502,7 +500,7 @@ public class ForgeDevPlugin extends DevBasePlugin
                 }
             });
             uni.setDestinationDir(delayedFile("{BUILD_DIR}/distributions").call());
-            uni.dependsOn("genBinPatches", crowdin, makeChangelog, "createVersionPropertiesFML", vjson);
+            uni.dependsOn("genBinPatches", makeChangelog, "createVersionPropertiesFML", vjson);
         }
         project.getArtifacts().add("archives", uni);
 
@@ -636,7 +634,6 @@ public class ForgeDevPlugin extends DevBasePlugin
             userDev.from(delayedZipTree(BINPATCH_TMP), new CopyInto("", "devbinpatches.pack.lzma"));
             userDev.from(delayedFileTree("{FML_DIR}/src/main/resources"), new CopyInto("src/main/resources"));
             userDev.from(delayedFileTree("src/main/resources"), new CopyInto("src/main/resources"));
-            userDev.from(delayedZipTree(CROWDIN_ZIP), new CopyInto("src/main/resources"));
             userDev.from(delayedZipTree(DevConstants.USERDEV_SRG_SRC), new CopyInto("src/main/java"));
             userDev.from(delayedFile(DEOBF_DATA), new CopyInto("src/main/resources/"));
             userDev.from(delayedFileTree("{FML_CONF_DIR}"), new CopyInto("conf", "astyle.cfg", "exceptor.json", "*.csv", "!packages.csv"));
