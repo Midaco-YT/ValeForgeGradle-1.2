@@ -76,7 +76,11 @@ dependencies {
     compileOnly 'com.mojang:authlib:1.5.16'
     compileOnly "net.minecraft:launchwrapper:1.11"
     compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
+
+    // Ajoutez JUnit ici
+    testImplementation 'junit:junit:4.13.2' // Utilisez 'testImplementation' pour les dépendances de test
 }
+
 
 compileJava {
     options.deprecation = true
@@ -127,7 +131,7 @@ test {
 uploadArchives {
     repositories.mavenDeployer {
         dependsOn 'build'
-        
+
         if (System.env.MAVEN_USER) {
             repository(url: "https://maven.minecraftforge.net/") {
                 authentication(userName: System.env.MAVEN_USER, password: System.env.MAVEN_PASSWORD)
@@ -204,24 +208,24 @@ def gitInfo(dir) {
         git = org.eclipse.jgit.api.Git.open(dir)
     } catch (org.eclipse.jgit.errors.RepositoryNotFoundException e) {
         return [
-            tag: '1.2',
-            offset: '1',
-            hash: '00000000',
-            branch: 'master',
-            commit: '0000000000000000000000',
-            abbreviatedId: '00000000'
+                tag: '1.2',
+                offset: '1',
+                hash: '00000000',
+                branch: 'master',
+                commit: '0000000000000000000000',
+                abbreviatedId: '00000000'
         ]
     }
 
     def desc = git.describe().setLong(true).setTags(true).call()
     if (desc == null) {
         return [
-            tag: '1.2',
-            offset: '1',
-            hash: '00000000',
-            branch: 'master',
-            commit: '0000000000000000000000',
-            abbreviatedId: '00000000'
+                tag: '1.2',
+                offset: '1',
+                hash: '00000000',
+                branch: 'master',
+                commit: '0000000000000000000000',
+                abbreviatedId: '00000000'
         ]
     }
 

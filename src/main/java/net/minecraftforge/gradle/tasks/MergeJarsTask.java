@@ -487,6 +487,7 @@ public class MergeJarsTask extends CachedTask
     private static class FieldName implements Function<FieldNode, String> {
         public static FieldName instance = new FieldName();
         public String apply(FieldNode in) {
+            assert in != null;
             return in.name;
         }
     }
@@ -585,9 +586,9 @@ public class MergeJarsTask extends CachedTask
         }
     }
 
-    private class MethodWrapper
+    private static class MethodWrapper
     {
-        private MethodNode node;
+        private final MethodNode node;
         public boolean     client;
         public boolean     server;
 
@@ -599,7 +600,7 @@ public class MergeJarsTask extends CachedTask
         @Override
         public boolean equals(Object obj)
         {
-            if (obj == null || !(obj instanceof MethodWrapper))
+            if (!(obj instanceof MethodWrapper))
             {
                 return false;
             }
@@ -626,10 +627,15 @@ public class MergeJarsTask extends CachedTask
         }
 
         @Override
-        public String toString()
-        {
-            return Objects.toStringHelper(this).add("name", node.name).add("desc", node.desc).add("server", server).add("client", client).toString();
+        public String toString() {
+            return "MyClass{" +
+                    "name='" + node.name + '\'' +
+                    ", desc='" + node.desc + '\'' +
+                    ", server='" + server + '\'' +
+                    ", client='" + client + '\'' +
+                    '}';
         }
+
     }
 
     public File getClient()

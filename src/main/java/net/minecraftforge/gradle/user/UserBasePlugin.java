@@ -57,6 +57,7 @@ import org.gradle.api.tasks.bundling.Zip;
 import org.gradle.api.tasks.compile.GroovyCompile;
 import org.gradle.api.tasks.compile.JavaCompile;
 import org.gradle.api.tasks.scala.ScalaCompile;
+import org.gradle.language.scala.tasks.BaseScalaCompileOptions;
 import org.gradle.plugins.ide.idea.model.IdeaModel;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
@@ -739,7 +740,7 @@ public abstract class UserBasePlugin<T extends UserExtension> extends BasePlugin
             @Override
             public boolean isSatisfiedBy(Object obj)
             {
-                boolean didWork = ((Task) obj).dependsOnTaskDidWork();
+                boolean didWork = ((Task) obj).getDidWork();
                 boolean exists = recomp.call().exists();
                 if (!exists)
                     return true;
@@ -1128,13 +1129,21 @@ public abstract class UserBasePlugin<T extends UserExtension> extends BasePlugin
         }
 
         // use zinc for scala compilation
-        project.getTasks().withType(ScalaCompile.class, new Action() {
+        project.getTasks().withType(ScalaCompile.class, new Action<ScalaCompile>() {
             @Override
-            public void execute(Object arg0)
-            {
-                ((ScalaCompile) arg0).getScalaCompileOptions().setUseAnt(false);
+            public void execute(ScalaCompile scalaCompile) {
+                // Configurez les options de compilation Scala selon vos besoins
+                BaseScalaCompileOptions options = scalaCompile.getScalaCompileOptions();
+
+                // Par exemple, vous pouvez configurer d'autres options
+                options.setFailOnError(true);  // Assurez-vous que la compilation échoue sur des erreurs
+                options.setDeprecation(true);   // Activer les avertissements de dépréciation
+                options.setUnchecked(true);      // Activer les avertissements d'opérations non vérifiées
+                options.setDebugLevel("line");   // Définir le niveau de débogage si nécessaire
+                // Ajoutez d'autres configurations selon vos besoins ici
             }
         });
+
     }
 
     /**
