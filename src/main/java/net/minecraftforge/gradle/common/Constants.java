@@ -50,21 +50,18 @@ public class Constants
     public static final Closure<Boolean> CALL_FALSE = new Closure<Boolean>(null){ public Boolean call(Object o){ return false; }};
 
     // urls
-    public static final String MC_JSON_URL      = "http://s3.amazonaws.com/Minecraft.Download/versions/{MC_VERSION}/{MC_VERSION}.json";
-    public static final String MC_JAR_URL       = "http://s3.amazonaws.com/Minecraft.Download/versions/{MC_VERSION}/{MC_VERSION}.jar";
-    public static final String MC_SERVER_URL    = "http://s3.amazonaws.com/Minecraft.Download/versions/{MC_VERSION}/minecraft_server.{MC_VERSION}.jar";
+    public static final String MC_JSON_URL      = "https://juanmuscaria.com/Minecraft.Download/versions/{MC_VERSION}/{MC_VERSION}.json";
+    public static final String MC_JAR_URL       = "https://juanmuscaria.com/Minecraft.Download/versions/{MC_VERSION}/{MC_VERSION}.jar";
+    public static final String MC_SERVER_URL    = "https://juanmuscaria.com/Minecraft.Download/versions/{MC_VERSION}/minecraft_server.{MC_VERSION}.jar";
     public static final String MCP_URL          = "https://files.minecraftforge.net/fernflower-fix-1.0.zip";
-    public static final String ASSETS_URL       = "http://resources.download.minecraft.net";
+    public static final String ASSETS_URL       = "https://resources.download.minecraft.net";
     public static final String LIBRARY_URL      = "https://libraries.minecraft.net/";
     public static final String FORGE_MAVEN      = "https://maven.minecraftforge.net";
-    public static final String BOBSONIC_REL 	= "http://bobsonic.com:8080/releases";
-    public static final String BOBSONIC_SNA 	= "http://bobsonic.com:8080/snapshots";
-    public static final String SPONGE		 	= "https://repo.spongepowered.org/repository/forge-proxy/";
-    public static final String ASSETS_INDEX_URL = "https://s3.amazonaws.com/Minecraft.Download/indexes/{ASSET_INDEX}.json";
+    public static final String ASSETS_INDEX_URL = "https://juanmuscaria.com/Minecraft.Download/indexes/{ASSET_INDEX}.json";
 
     // MCP things
     public static final String CONFIG_MCP_DATA  = "mcpSnapshotDataConfig";
-    public static final String MCP_JSON_URL     = "http://export.mcpbot.bspk.rs/versions.json";
+    public static final String MCP_JSON_URL     = FORGE_MAVEN + "/de/oceanlabs/mcp/versions.json";
 
     // things in the cache dir.
     public static final String NATIVES_DIR      = "{CACHE_DIR}/minecraft/net/minecraft/minecraft_natives/{MC_VERSION}";

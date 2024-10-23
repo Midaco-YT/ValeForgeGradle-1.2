@@ -110,9 +110,6 @@ public abstract class BasePlugin<K extends BaseExtension> implements Plugin<Proj
             public void execute(Project proj)
             {
                 addMavenRepo(proj, "forge", Constants.FORGE_MAVEN);
-                addMavenRepo(proj, "bobsonc_rel", Constants.BOBSONIC_REL);
-                addMavenRepo(proj, "bobsonc_sna", Constants.BOBSONIC_SNA);
-                addMavenRepo(proj, "sponge", Constants.SPONGE);
                 proj.getRepositories().mavenCentral();
                 addMavenRepo(proj, "minecraft", Constants.LIBRARY_URL);
             }
@@ -203,8 +200,8 @@ public abstract class BasePlugin<K extends BaseExtension> implements Plugin<Proj
             return;
 
         logger.lifecycle("#################################################");
-        logger.lifecycle("         ForgeGradle {}        ", this.getVersionString());
-        logger.lifecycle("  https://github.com/MinecraftForge/ForgeGradle  ");
+        logger.lifecycle("        ForgeGradle {}         ", this.getVersionString());
+        logger.lifecycle("    https://github.com/Doenerstyle/ForgeGradle   ");
         logger.lifecycle("#################################################");
         logger.lifecycle("               Powered by MCP {}               ", this.delayedString("{MCP_VERSION}"));
         logger.lifecycle("             http://modcoderpack.com             ");
