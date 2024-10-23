@@ -434,12 +434,6 @@ public class ForgeDevPlugin extends DevBasePlugin
     @SuppressWarnings("serial")
     private void createPackageTasks()
     {
-        CrowdinDownloadTask crowdin = makeTask("getLocalizations", CrowdinDownloadTask.class);
-        {
-            crowdin.setOutput(delayedFile(CROWDIN_ZIP));
-            crowdin.setProjectId(CROWDIN_FORGEID);
-            crowdin.setExtract(false);
-        }
 
         ChangelogTask makeChangelog = makeTask("createChangelog", ChangelogTask.class);
         {
